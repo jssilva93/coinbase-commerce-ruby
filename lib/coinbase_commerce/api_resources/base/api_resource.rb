@@ -15,6 +15,11 @@ module CoinbaseCommerce
           Util.convert_to_api_object(resp.data, @client, self)
         end
 
+        def self.resolve(id, params = {})
+          resp = @client.request(:post, "#{self::RESOURCE_PATH}/#{id}/resolve", params)
+          Util.convert_to_api_object(resp.data, @client, self)
+        end
+
         def refresh(params = {})
           resp = @client.request(:get, "#{self.class::RESOURCE_PATH}/#{self[:id]}", params)
           initialize_from(resp.data)
